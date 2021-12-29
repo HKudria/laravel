@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('user{id}','App\Http\Controllers\UserController@user');
+Route::get('user/','App\Http\Controllers\UserController@index');
+
+//php artisan make:migration create_test_table - create migration after its should to write
+
