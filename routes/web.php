@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +20,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','App\Http\Controllers\PostController@index');
 
-Route::get('user{id}','App\Http\Controllers\UserController@user');
-Route::get('user/','App\Http\Controllers\UserController@index');
+//first I need to create some model "php artisan make:model Name --factory"
+//to create resource controller use the following command "php artisan make:controller NameController -r"
+//or use only one command php artisan make:model Name --controller --resource
+//Route::resource('/post', 'PostController');
+//Route::resource('/post', PostController::class);
+// when I write this link it's the same link bellow
+//but this way create wrong route list, I don't know how fix it
+
+Route::get('post/','App\Http\Controllers\PostController@index')->name('post.index');
+Route::get('post/create','App\Http\Controllers\PostController@create')->name('post.create');
+Route::get('post/show/{id}','App\Http\Controllers\PostController@show')->name('post.show');
+Route::get('post/edit/{id}','App\Http\Controllers\PostController@edit')->name('post.edit');
+Route::post('post/','App\Http\Controllers\PostController@store')->name('post.store');
+Route::patch('post/show/{id}','App\Http\Controllers\PostController@update')->name('post.update');
+Route::delete('post/{id}','App\Http\Controllers\PostController@destroy')->name('post.destroy');
+
+
+//Route::get('user{id}','App\Http\Controllers\UserController@user');
+//Route::get('user/','App\Http\Controllers\UserController@index');
 
 //php artisan make:migration create_test_table - create migration after its should to write
 
