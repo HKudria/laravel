@@ -3,10 +3,10 @@
 @section('content')
     @if(isset($_GET['search']))
         @if(count($posts)>0)
-            <h2>Result for "{{$_GET['search']}}"</h2>
+            <h2>Result for "{{htmlspecialchars($_GET['search'])}}"</h2>
             <p class="lead">Total found "{{count($posts)}}" posts</p>
         @else
-            <h2>We didn't find any result for "{{$_GET['search']}}". Sorry</h2>
+            <h2>We didn't find any result for "{{htmlspecialchars($_GET['search'])}}". Sorry</h2>
             <a href="{{route('post.index')}}" class="btn btn-outline-primary">Show all posts</a>
         @endif
     @endif

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('test');
 //});
 
-Route::get('/','App\Http\Controllers\PostController@index');
+Route::get('/','App\Http\Controllers\HomeController@index');
 
 //first I need to create some model "php artisan make:model Name --factory"
 //to create resource controller use the following command "php artisan make:controller NameController -r"
@@ -42,3 +42,7 @@ Route::delete('post/{id}','App\Http\Controllers\PostController@destroy')->name('
 
 //php artisan make:migration create_test_table - create migration after its should to write
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        //if user isn't logged he can't show any pages other than index and show. He will redirect on login page
+        $this->middleware('auth')->except('index','show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,12 +55,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    //for check field we need create request php artisan make:request PostRequest
+    public function store(PostRequest $request)
     {
         $post = new Post();
         $post->title = $request->title;
         $post->short_title = \Str::length($request->title)>30 ? \Str::substr($request->title,0,30). '...' : $request->title;
-        $post->author_id = rand(1,4);
+        $post->author_id =\Auth::user()->id;
         $post->descr = $request->descr;
         if($request->file('img')){
             $path = \Storage::putFile('public', $request->file('img'));
@@ -74,6 +83,9 @@ class PostController extends Controller
     {
         $post = Post::join('users','author_id', '=', 'users.id')
            ->find($id);
+        if(!$post){
+            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+        }
         return view('posts.show',compact('post'));
     }
 
@@ -86,6 +98,12 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        if(!$post){
+            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+        }
+        if($post->author_id != \Auth::user()->id  && \Auth::user()->role != 'admin'){
+           return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');
+        }
         return view('posts.edit',compact('post'));
     }
 
@@ -99,6 +117,13 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+        if(!$post){
+            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+        }
+        if($post->author_id != \Auth::user()->id && \Auth::user()->role != 'admin'){
+            return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');
+        }
+
         $post->title = $request->title;
         $post->short_title = \Str::length($request->title)>30 ? \Str::substr($request->title,0,30). '...' : $request->title;
         $post->descr = $request->descr;
@@ -124,6 +149,12 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        if(!$post){
+            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+        }
+        if($post->author_id != \Auth::user()->id  && \Auth::user()->role != 'admin'){
+            return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');
+        }
         $post->delete();
 
         return redirect()->route('post.index')->with('success','Post was deleted successful!');

@@ -42,3 +42,27 @@ nav{
     display: contents;
 }
 
+.form-search{
+    margin-top: 12px;
+}
+
+.navbar{
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.main-img{
+    object-fit: cover;
+}
+
+.row{
+    padding-top: 20px;
+}
+.rounded-circle-heading {
+    margin: auto;
+    margin-left: 33.33333%;
+}
+
+.main-p, .main-h2{
+    text-align: center;
+}
