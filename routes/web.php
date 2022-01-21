@@ -46,3 +46,5 @@ Route::delete('post/{id}','App\Http\Controllers\PostController@destroy')->name('
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('home/price/','App\Http\Controllers\HomeController@price')->name('home.price');
+Route::get('home/contact/','App\Http\Controllers\HomeController@contact')->name('home.contact');

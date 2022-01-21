@@ -66,3 +66,57 @@ nav{
 .main-p, .main-h2{
     text-align: center;
 }
+
+@media (max-width: 991px) {
+    .collapse:not(.show) {
+        display: flex;
+    }
+
+    .offset-3 {
+        margin-left: 5%;
+    }
+
+    .navbar-nav {
+        display: block ruby;
+
+    }
+}
+
+@media (max-width: 1400px){
+    .order-md-2 {
+        order: unset !important;
+    }
+    .col-md-5 {
+        width: 100%;
+        text-align: center;
+    }
+    .col-md-7 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1000px){
+    .col-md-7 {
+        padding-left: 10%;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .card-header {
+        min-height: 87px;
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 520px) {
+   .main-img{
+       width: inherit !important;
+      height: auto;
+   }
+}
+
+
+
+

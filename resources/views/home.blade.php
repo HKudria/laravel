@@ -14,13 +14,13 @@
             <img class="bd-placeholder-img rounded-circle rounded-circle-heading" src="{{asset('/img/price.png')}}" width="140" height="140"></img>
             <h2 class="main-h2">Cennik</h2>
             <p class="main-p">Cenny na massaże oferowane przez mnie</p>
-            <p class="main-p"><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            <p class="main-p"><a class="btn btn-secondary" href="{{route('home.price')}}">Więcej informacji &raquo;</a></p>
         </div>
         <div class="col-lg-4">
             <img class="bd-placeholder-img rounded-circle rounded-circle-heading" src="{{asset('/img/contact.png')}}" width="140" height="140"></img>
             <h2 class="main-h2">Kontakt</h2>
-            <p class="main-p">Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-            <p class="main-p"><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+            <p class="main-p">Umów się na wizytę albo zadaj pytanie</p>
+            <p class="main-p"><a class="btn btn-secondary" href="{{route('home.contact')}}">Więcej informacji &raquo;</a></p>
         </div>
     </div><!-- /.row -->
 

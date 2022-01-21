@@ -7,10 +7,9 @@
     <title>{{$title ?? 'Undefined page'}}</title>
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/general.css')}}">
     <script scr="{{asset('/js/app.js')}}"></script>
     <script src="{{asset('/js/bootstrap.bundle.min.js')}}"></script>
-
+    <link rel="stylesheet" href="{{asset('/css/general.css')}}">
 
 
 </head>
@@ -21,35 +20,29 @@
         <div class="container collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="col-6 navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Glówna</a>
                 </li>
                 <li class="nav-item active offset-3">
                     <a class="nav-link active" aria-current="page" href="{{route('post.index')}}">Blog</a>
                 </li>
-                <li class="nav-item active offset-3">
-                    <a class="nav-link active" aria-current="page" href="{{route('post.create')}}">Create post</a>
-                </li>
+                @auth()
+                    @if(Auth::user()->role == 'admin')
+                        <li class="nav-item active offset-3">
+                            <a class="nav-link active" aria-current="page" href="{{route('post.create')}}">Create post</a>
+                        </li>
+                    @endif
+                @endauth
 
             </ul>
             <form class="d-flex form-search" action="{{route('post.index')}}">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Wyszukaj" aria-label="Search" name="search">
+                <button class="btn btn-outline-success" type="submit">Wyszukaj</button>
             </form>
-            <ul class="navbar-nav ms-auto ">
+            @auth()
+                @if(Auth::user()->role == 'admin')
+                  <ul class="navbar-nav ms-auto ">
                 <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
 
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
@@ -67,8 +60,9 @@
                             </form>
                         </div>
                     </li>
-                @endguest
-            </ul>
+                  </ul>
+                @endif
+            @endauth
         </div>
     </div>
 </nav>
@@ -93,6 +87,9 @@
     @yield('content')
 
 </div>
+<footer class="py-3 my-4">
+    <p class="text-center text-muted">© 2022 Powered by  <a href="https://www.linkedin.com/in/herman-kudria-10868b207/" target="_blank">Herman Kudria</a></p>
 
+</footer>
 </body>
 </html>

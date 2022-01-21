@@ -26,7 +26,6 @@ class PostController extends Controller
             $posts =  Post::join('users','author_id', '=', 'users.id')
                 ->where('title','like','%'.$request->search.'%')
                 ->orWhere('descr','like','%'.$request->search.'%')
-                ->orWhere('users.name','like','%'.$request->search.'%')
                 ->orderBY('posts.created_at','desc')
                 ->get();
             return view('posts.index', compact('posts'));
@@ -70,7 +69,7 @@ class PostController extends Controller
         }
         $post->save();
 
-        return redirect()->route('post.index')->with('success','Post was created successful!');
+        return redirect()->route('post.index')->with('success','Post zapisano z succesem!');
     }
 
     /**
@@ -84,7 +83,7 @@ class PostController extends Controller
         $post = Post::join('users','author_id', '=', 'users.id')
            ->find($id);
         if(!$post){
-            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+            return redirect()->route('post.index')->withErrors('Nie poprawna strona!');
         }
         return view('posts.show',compact('post'));
     }
@@ -99,7 +98,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         if(!$post){
-            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+            return redirect()->route('post.index')->withErrors('Nie poprawna strona!');
         }
         if($post->author_id != \Auth::user()->id  && \Auth::user()->role != 'admin'){
            return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');
@@ -118,7 +117,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         if(!$post){
-            return redirect()->route('post.index')->withErrors('This page isn\'t correct');
+            return redirect()->route('post.index')->withErrors('Nie poprawna strona!');
         }
         if($post->author_id != \Auth::user()->id && \Auth::user()->role != 'admin'){
             return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');

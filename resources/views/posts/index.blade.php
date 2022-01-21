@@ -1,4 +1,4 @@
-@extends('layouts.layout', ['title' => 'Main page'])
+@extends('layouts.layout', ['title' => 'Blog - Nadiia Yahnych'])
 
 @section('content')
     @if(isset($_GET['search']))
@@ -17,11 +17,8 @@
                     <div class="card-header"><h2>{{$post->short_title}}</h2></div>
                     <div class="card-body">
                         <div class="card-img" style="background-image: url({{$post->img ?? asset('/img/default.jpg')}})"></div>
-                        <div class="card-author"><h2>Author: {{$post->name}}</h2></div>
                        <a href="{{ route('post.show', ['id' => $post->post_id]) }}" class="btn btn-outline-primary">Show post</a>
                     </div>
-
-
                 </div>
             </div>
         @endforeach
