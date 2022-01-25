@@ -26,7 +26,7 @@ Route::get('/','App\Http\Controllers\HomeController@index');
 //Route::resource('/post', 'PostController');
 //Route::resource('/post', PostController::class);
 // when I write this link it's the same link bellow
-//but this way create wrong route list, I don't know how fix it
+//but this method create wrong route list, I don't know how fix it
 
 Route::get('post/','App\Http\Controllers\PostController@index')->name('post.index');
 Route::get('post/create','App\Http\Controllers\PostController@create')->name('post.create');
@@ -36,15 +36,12 @@ Route::post('post/','App\Http\Controllers\PostController@store')->name('post.sto
 Route::patch('post/show/{id}','App\Http\Controllers\PostController@update')->name('post.update');
 Route::delete('post/{id}','App\Http\Controllers\PostController@destroy')->name('post.destroy');
 
-
-//Route::get('user{id}','App\Http\Controllers\UserController@user');
-//Route::get('user/','App\Http\Controllers\UserController@index');
-
-//php artisan make:migration create_test_table - create migration after its should to write
-
+//php artisan make:migration create_test_table - create migration
 
 Auth::routes();
-Route::get('register','App\Http\Controllers\HomeController@index');
+
+//Route::get('register','App\Http\Controllers\HomeController@index');
+//it was change in Controller/Middleware/Authenticate.php if user don't have permission he'll redirect to home view
 
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');

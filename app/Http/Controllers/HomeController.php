@@ -57,7 +57,6 @@ class HomeController extends Controller
         }
         $contect->text = $request->text;
 
-
         $contect->save();
         $id = $contect->contact_id;
         return redirect()->route('home.sendMail',['id'=>$id]);
