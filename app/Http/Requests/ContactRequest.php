@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class ContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,11 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        //check field from form
         return [
-            'title' => 'required|min:2|max:40',
-            'descr' => 'required|min:10|max:550',
-            'img' => 'mimes:jpeg,jpg,png|max:5000',
+            'name' => 'required|min:3|max:40',
+            'email' => 'required|email:rfc',
+            'text' => 'required|min:10|max:550',
+            'ip' => 'ip',
         ];
     }
 }

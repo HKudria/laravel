@@ -44,7 +44,11 @@ Route::delete('post/{id}','App\Http\Controllers\PostController@destroy')->name('
 
 
 Auth::routes();
+Route::get('register','App\Http\Controllers\HomeController@index');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('home/price/','App\Http\Controllers\HomeController@price')->name('home.price');
 Route::get('home/contact/','App\Http\Controllers\HomeController@contact')->name('home.contact');
+Route::post('home/contact/','App\Http\Controllers\HomeController@sendMessage')->name('home.sendMassage');
+Route::get('home/sendMail/{id}','App\Http\Controllers\MailController@store')->name('home.sendMail');
