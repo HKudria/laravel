@@ -17,7 +17,7 @@ class MailController extends Controller
 
     public function store(Request $request) {
        $contact = Contact::findOrFail($request->id);
-       Mail::to($contact->email)->send(new SendMessage($contact));
+       Mail::to(env('MAIL_WHO_GET_MAIL'))->send(new SendMessage($contact));
        return redirect()->route('home')->with('success','Widomość wyslana pomyslnie. Wkrótce skontaktuję się z tobą');
     }
 }

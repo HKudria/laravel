@@ -30,7 +30,7 @@ class SendMessage extends Mailable
      */
     public function build()
     {
-        $this->subject('Odpowiedż w sprawie kontaktu na stronie www')
+        $this->subject('Kontatk w sprawie masażu')
             ->replyTo($this->contact->email)
             ->view('emails.sendMessage')
             ->with([
