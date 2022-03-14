@@ -69,7 +69,7 @@ class PostController extends Controller
         }
         $post->save();
 
-        return redirect()->route('post.index')->with('success','Post zapisano z succesem!');
+        return redirect()->route('post.index')->with('success','Post was added succesfull!');
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends Controller
         $post = Post::join('users','author_id', '=', 'users.id')
            ->find($id);
         if(!$post){
-            return redirect()->route('post.index')->withErrors('Nie poprawna strona!');
+            return redirect()->route('post.index')->withErrors('Wrong page!');
         }
         return view('posts.show',compact('post'));
     }
@@ -98,7 +98,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         if(!$post){
-            return redirect()->route('post.index')->withErrors('Nie poprawna strona!');
+            return redirect()->route('post.index')->withErrors('Wrong page!');
         }
         if($post->author_id != \Auth::user()->id  && \Auth::user()->role != 'admin'){
            return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');
@@ -117,7 +117,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         if(!$post){
-            return redirect()->route('post.index')->withErrors('Nie poprawna strona!');
+            return redirect()->route('post.index')->withErrors('Wrong page!');
         }
         if($post->author_id != \Auth::user()->id && \Auth::user()->role != 'admin'){
             return redirect()->route('post.index')->withErrors('You don\'t have permission for it!');
