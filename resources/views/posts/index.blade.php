@@ -1,4 +1,4 @@
-@extends('layouts.layout', ['title' => 'Blog - Nadiia Yahnych'])
+@extends('laravel.resources.views.layouts.layout', ['title' => 'Blog - Nadiia Yahnych'])
 
 @section('content')
     @if(isset($_GET['search']))

@@ -1,5 +1,5 @@
 
-@extends('layouts.layout', ['title' => 'Creat new post:'])
+@extends('laravel.resources.views.layouts.layout', ['title' => 'Creat new post:'])
 
 
 
@@ -7,7 +7,7 @@
     <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <h3>Create post</h3>
-        @include('posts.parts.form')
+        @include('parts.form')
 
         <input type="submit" value="Create post" class="btn btn-outline-primary">
     </form>

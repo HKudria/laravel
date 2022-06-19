@@ -1,4 +1,4 @@
-@extends('layouts.layout', ['title' => $post->title])
+@extends('laravel.resources.views.layouts.layout', ['title' => $post->title])
 
 @section('content')
 
